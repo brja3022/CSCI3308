@@ -1,0 +1,35 @@
+body {
+    background-color: black;
+}
+h1 {
+    font-family: 'Major Mono Display', monospace;
+    color: darkcyan;
+    font-size: 70px;
+    text-align: center;
+}
+input {
+  width: 45%;
+  height: 300px;
+  color: aquamarine; 
+  font-family: 'Inconsolata', monospace;
+}
+
+form {
+    color: orange;
+    font-family: 'Shadows Into Light', cursive;
+    text-align: left;
+}
+
+#cCode {
+    padding-left: 15%;
+}
+
+#pythonOut form {
+    text-align: right;
+}
+
+#pCode {
+    color: dodgerblue;
+    padding-right: 15%;
+    
+}

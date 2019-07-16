@@ -4,32 +4,87 @@ body {
 h1 {
     font-family: 'Major Mono Display', monospace;
     color: darkcyan;
-    font-size: 70px;
+    font-size: 60px;
     text-align: center;
+    text-shadow: 0 -1px 2px darkcyan,
+        0px -3px 6px rgba(0,139,139 ,1 ),
+        0px -6px 12px rgba(0,89,89 ,1 ),
+        0px -10px 20px rgba(0,50,50,1),
+        0px -15px 30px rgba(0,100,100,1),
+        0px -21px 42px rgb(0,63,63);
+    animation:fire 0.01s ease infinite,colorSpin 5s linear infinite;
+        
 }
-input {
+@keyframes fire{
+  40%{
+    text-shadow: 0 -4px 8px darkcyan,
+        0px -12px 24px rgba(0,139,139 ,1),
+        0px -24px 48px rgba(0,89,89 ,1),
+        0px -40px 80px rgba(0,60,60,1),
+        0px -60px 120px rgba(0,100,100,1),
+        0px -84px 168px rgba(0,63,63,1);
+  
+    }
+}
+@keyframes colorSpin{
+  to{filter:hue-rotate(360deg)}
+}
+
+input[type=text] {
+  width: 45%;
+/*  height: 300px;*/
+  color: purple; 
+  font-family: 'Inconsolata', monospace;
+  font-size: 18px;
+  line-height: normal;
+  padding-top: 0;
+  padding-left: 0;
+}
+#Ctext textarea {
   width: 45%;
   height: 300px;
-  color: aquamarine; 
+  color: orange; 
   font-family: 'Inconsolata', monospace;
+  font-size: 18px;
+  line-height: normal;
+  padding-top: 0;
+  padding-left: 0;
+  margin-left: 55%;
+  border-color: orange;
+  box-shadow: 0 0 10px 0 orange;
+  box-sizing: border-box;
+
+
 }
 
-form {
-    color: orange;
-    font-family: 'Shadows Into Light', cursive;
-    text-align: left;
+#Ptext textarea {
+  width: 45%;
+  height: 300px;
+  color: blue; 
+  font-family: 'Inconsolata', monospace;
+  font-size: 18px;
+  line-height: normal;
+  padding-top: 0;
+  padding-left: 0;
+  border-color: blue;
+  box-shadow: 0 0 10px 0 blue;
+  box-sizing: border-box;
 }
+
+
 
 #cCode {
-    padding-left: 15%;
-}
-
-#pythonOut form {
+    padding-right: 15%;
+    font-family: 'Shadows Into Light', cursive;
+    color: orange;
     text-align: right;
+    font-size: 20px;
 }
 
 #pCode {
     color: dodgerblue;
-    padding-right: 15%;
+    padding-left: 15%;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 20px;
     
 }

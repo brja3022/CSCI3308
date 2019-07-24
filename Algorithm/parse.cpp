@@ -3,21 +3,12 @@
 #include <string>
 #include <ctype.h>
 
-#include "mysql_connection.h"
-
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
 
 
-
+extern "C" {
 
 using namespace std;
 
-void dbConnect(){
-
-}
 
 struct node{
     string word;
@@ -71,4 +62,6 @@ int main(){
 
     nodeCheck(&wordList);
     return 1;
+}
+
 }

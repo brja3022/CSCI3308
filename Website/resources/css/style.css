@@ -45,7 +45,7 @@ input[type=text] {
   padding-top: 0;
   padding-left: 0;
 }
-#Ctext textarea {
+#Ctext form {
   width: 45%;
   height: 300px;
   color: orange; 
@@ -62,20 +62,24 @@ input[type=text] {
 
 }
 
-#Ptext textarea {
+#Ptext form {
   width: 45%;
   height: 300px;
   color: blue; 
+  background-color:white;
   font-family: 'Inconsolata', monospace;
   font-size: 18px;
   line-height: normal;
-  padding-top: 0;
-  padding-left: 0;
   border-color: blue;
   box-shadow: 0 0 10px 0 blue;
   box-sizing: border-box;
 }
-
+input[type=text]{
+	width: 100%;
+	padding-bottom: 277px;
+  
+	
+}
 
 
 #cCode {
@@ -87,6 +91,22 @@ input[type=text] {
 }
 
 #pCode {
+    color: dodgerblue;
+    padding-left: 15%;
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 20px;
+    
+}
+
+#stableI {
+    padding-right: 15%;
+    font-family: 'Shadows Into Light', cursive;
+    color: orange;
+    text-align: right;
+    font-size: 20px;
+}
+
+#stableO {
     color: dodgerblue;
     padding-left: 15%;
     font-family: 'Shadows Into Light', cursive;

@@ -9,7 +9,10 @@ We are making an online Transpiler that converts C to Python code. <br />
 
 
 open mysql workbench
-
+type these sequentially
+    create database functionDB;
+    use functionDB;
+    
 copy and paste all code from the scripts.sql file in the database folder
 Execute the code;
 

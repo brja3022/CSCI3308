@@ -1,4 +1,4 @@
-CREATE DATABASE functionDB;
+
 
 CREATE TABLE IF NOT EXISTS c_functions(
 function_id INT NOT NULL,

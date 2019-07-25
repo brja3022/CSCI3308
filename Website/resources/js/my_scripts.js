@@ -1,32 +1,26 @@
-var cTable = [{keyword: "for", nesFields: "3"},//This needs more fields to contain the rest of the meaningful parts of the user code.
-				{keyword: "if", nesFields: "1"},
-				// {keyword: "else if", nesFields: "2"},
-				// {keyword: "else"},
-				// {keyword: "switch"},
-				// {keyword: "case"},
-				// {keyword: "break"},
+var cTable = [{keyword: "for", nesFields: "3"},
 				{keyword: "while"}];
 
-var pTable = [{keyword: "for", nesFields: "2"},//Update these tomorrow and move over appropriate variables.
-				{keyword: "if"},
-				// {keyword: "elif"},
-				// {keyword: "else"},
-				// {keyword: "switch"},
-				// {keyword: "case"},
-				// {keyword: "break"},
-				{keyword: "while"}];
+
 
 var typeCast = [{keyword: "int"},{keyword: "long"},{keyword: "double"},{keyword: "string"},{keyword: "char"},{keyword: "float"}];
 
 var letter = new RegExp(/^[A-Za-z]+$/);
 
 var number = new RegExp(/^[0-9]+$/);
+var word1 = "or";
+var word2 = "and";
+var alphOp = new RegExp('\\b'+ word1 + word2 + '\\b');
 
 var operator = new RegExp(/^[<>=]+$/);
+
+var logic = new RegExp(/^[|&]+$/);
 
 //var specialChar = new RegExp(/^[+-*/^]+$/);
 
 var equal = new RegExp(/^[=]+$/);
+
+var alphaNum = new RegExp(/^[A-Za-z0-9]+$/);
 
 var mysql = require('mysql');
 
@@ -157,7 +151,9 @@ function transpile(word){
 		}
 	}
 }
-
+var pTable = [{keyword: "for", nesFields: "2"},
+				{keyword: "if"},
+				{keyword: "while"}];
 function forSwitch(){
 	var lang = document.getElementById("iCode").innerHTML;
 	var variable1 = ""; // user variable 1 name
@@ -167,11 +163,17 @@ function forSwitch(){
 	var increment = "";
 	var i = 0;
 	var checker = 0; // boolean for if variable 1 has a preset value
+	var userIn = document.getElementById("inputText").value;
+
 	if(lang == "INSERT C CODE"){
 		//document.getElementById("outputText").value = "Check 1";
-		var userIn = document.getElementById("inputText").value;
 			while(userIn[i] != "("){
 				i++
+				if(i-1 == userIn.length){
+					document.getElementById("outputText").value = "Invalid";
+					return;
+					break;
+				}
 			}
 			while(userIn[i] != null && !userIn[i].match(letter)){
 				i++; //Moving through whitespace
@@ -258,10 +260,261 @@ function forSwitch(){
 		document.getElementById("outputText").value += "       " + increment + " ...";
 
 	}
+	else{
+		while(userIn[i] != null && !userIn[i].match(letter)){
+			i++;
+		}
+		while(userIn[i] != null && userIn[i].match(letter)){
+			i++;
+		}
+		while(userIn[i] != null && !userIn[i].match(letter)){
+			i++;
+		}
+		while(userIn[i] != null && userIn[i].match(letter)){
+			variable1 += userIn[i]; 
+			i++;
+		}
+		while(userIn[i] != "("){
+			i++;
+			if(i+1 > userIn.length){
+				document.getElementById("outputText").value = "Invalid";
+				return;
+			}
+		}
+		
+		
+		while(userIn[i] != null && !userIn[i].match(alphaNum)){
+			i++;
+		}
+		while(userIn[i] != null && userIn[i].match(alphaNum)){
+			limit += userIn[i];
+			i++;
+		}
+		while(1){
+			if(userIn[i] == ","){
+				startVal = limit;
+				limit = "";
+				while(userIn[i] != null && !userIn[i].match(alphaNum)){
+					i++;
+				}
+				while(userIn[i] != ")"){
+					limit += userIn[i];
+					i++;
+				}
+				break;
+			}
+			else if(userIn[i] == ")"){
+				break;
+			}
+			i++;
+		}
+		document.getElementById("outputText").value = "for( " + variable1;
+		if(startVal != ""){
+			document.getElementById("outputText").value += " = " + startVal + "; " + variable1 + " <= " + limit + " ; " + variable1 + "++){ ... }";
+		}
+		else{
+			document.getElementById("outputText").value += "; " + variable1 + " <= " + limit + "; " + variable1 + "++) {...}"; 
+		}
+	}
+
 }
 
-function ifSwitch(){
 
+
+function ifSwitch(){
+	var lang = document.getElementById("iCode").innerHTML;
+	var i = 0;
+	var userIn = document.getElementById("inputText").value;
+	var variable1 = "";
+	var opVar = "";
+	var varLim = "";
+	var extra1 = "";
+	var el1 = "";
+	var extra2 = "";
+	var el2 = "";
+	if(lang == "INSERT C CODE"){
+		while(userIn[i] != "("){
+			if(i+1 == userIn.length){
+				document.getElementById("outputText").value = "Invalid";
+				return;
+			}
+			i++;
+		}
+		while(userIn[i] != null && !userIn[i].match(alphaNum)){
+			i++;
+		}
+		while(userIn[i] != null && userIn[i].match(alphaNum)){
+			variable1 += userIn[i];
+			i++;
+		}
+		while(userIn[i] != null && !userIn[i].match(alphaNum)){
+			if(userIn[i] != null && userIn[i].match(operator)){
+				opVar += userIn[i];
+				i++;
+
+				if(userIn[i] != null && userIn[i].match(operator)){
+					opVar += userIn[i];
+					i++;
+				}
+			}
+			if(userIn[i] == ")"){
+				break;
+			}
+			i++;
+		}
+		while(userIn[i] != null && userIn[i].match(alphaNum)){ 
+			varLim += userIn[i];
+			i++;
+		}
+		 //document.getElementById("outputText").value = "Here";
+		while(userIn[i] != null && !userIn[i].match(alphaNum)){
+			if(userIn[i] == ")"){
+				break;
+			}
+			else if(userIn[i] != null && userIn[i].match(logic)){
+				el1 = userIn[i];
+				i+=2;
+				break;
+			}
+		 	i++;
+		}
+		//document.getElementById("outputText").value = "extra1";
+
+		while(userIn[i] != null && !userIn[i].match(alphaNum)){
+			i++;
+			
+		}
+		//document.getElementById("outputText").value = "extra1";
+		while(userIn[i] != null && !userIn[i].match(logic)){
+			if(userIn[i] == ")"){
+				break;
+			}
+			extra1 += userIn[i];
+			i++;
+		}
+		//document.getElementById("outputText").value = extra1;
+		while(userIn[i] !=null && (!userIn[i].match(logic) || !userIn[i].match(alphaNum))){
+			if(userIn[i] == ")"){
+				break;
+			}
+			else if(userIn[i] != null && userIn[i].match(logic)){
+				el2 = userIn[i];
+				i+=2;
+				break;
+			}
+			i++;
+		}
+		//document.getElementById("outputText").value = el2;
+		while(userIn[i] != null && !userIn[i].match(logic)){
+			if(userIn[i] == ")"){
+				break;
+			}
+			extra2 += userIn[i];
+			i++;
+		}
+		if(userIn[i] != null && userIn[i].match(logic)){
+			document.getElementById("outputText").value = "Too many operators, we quit";
+			return;
+		}
+		if(el1 == "&"){
+			el1 = "and";
+		}
+		else if(el1 == "|"){
+			el1 = "or";
+		}
+		if(el2 == "&"){
+			el2 = "and";
+		}
+		else if(el2 == "|"){
+			el2 = "or";
+		}
+		document.getElementById("outputText").value = "if " + variable1 +  " " + opVar + " " + varLim + " " + el1 + " " + extra1 + el2 + extra2 + ":   ...";
+	
+	}
+	else{
+		while(1){
+			while(userIn[i] != null && !userIn[i].match(alphaNum)){
+				i++;
+			}
+			while(userIn[i] != null && userIn[i].match(alphaNum)){
+				i++;
+			}
+			while(userIn[i] != null && !userIn[i].match(alphaNum)){
+				i++;
+			}//Start at first variable
+			while(userIn[i] != null){
+				if(!userIn[i+2] == "d" || !userIn[i+1] == "r"){
+					break;
+				}
+				if(userIn == ":"){
+					break;
+				}
+				variable1 += userIn[i]; 
+				i++;
+			}
+			
+			if(userIn == ":"){
+				break;
+			}
+			while(userIn[i] != null && userIn[i].match(alphaNum)){
+				el1 += user[i];
+				i++;
+			}
+			while(userIn[i] != null && !userIn[i].match(alphaNum)){
+				i++;
+			}
+			while(userIn[i] != null){
+				if(!userIn[i+2] == "d" || !userIn[i+1] == "r"){
+					break;
+				}
+				if(userIn == ":"){
+					break;
+				}
+				extra1 += userIn[i]; 
+				i++;
+			}
+			if(userIn == ":"){
+				break;
+			}
+			while(userIn[i] != null && userIn[i].match(alphaNum)){
+				el2 += user[i];
+				i++;
+			}
+			while(userIn[i] != null && !userIn[i].match(alphaNum)){
+				i++;
+			}
+			while(userIn[i] != null){
+				if(userIn[i+2] == "d" && userIn[i+1] == "r"){
+					break;
+				}
+				if(userIn[i] == ":"){
+					break;
+				}
+				extra2 += userIn[i]; 
+				i++;
+			}
+			if(el1 == "and"){
+				el1 = "&&";
+			}
+			else if(el1 == "or"){
+				el1 = "||";
+			}
+			if(el2 == "and"){
+				el2 = "&&";
+			}
+			else if(el2 == "or"){
+				el2 = "||";
+			}
+			if(userIn[i-1] == ":"){
+				break;
+			}
+			document.getElementById("outputText").value = "Too many operators, we quit";
+			return;
+		}
+		
+		//document.getElementById("outputText").value = "if( " + variable1 + " " + el1 + extra1 + el2 + extra2 + "){...}";
+	}
+	
 }
 function whileSwitch(){
 

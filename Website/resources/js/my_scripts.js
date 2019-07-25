@@ -71,7 +71,7 @@ function makeQuery(){
 
 
 function parse(){
-
+//Create linked list classes for parsing
 	class Node {
 		constructor(value, next, prev) {
 			this.value = value;
@@ -103,7 +103,7 @@ function parse(){
 		}
 	}
 
-	const list = new LinkedList();
+	const list = new LinkedList(); //linked list for 
 	var input = document.getElementById("inputText").value;
 	var counter = 0;
 	//document.getElementById("outputText").value = document.getElementById("inputText").value;

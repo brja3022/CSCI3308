@@ -7,10 +7,21 @@ We are making an online Transpiler that converts C to Python code. <br />
 <b> Languages used: </b> SQL, C, Python, HTML, CSS, JavaScript 
 
 
-Current databases that exist
-ckeywords
-	-c_functions(function_id, name)
-======= <br />
 
+open mysql workbench
 
+copy and paste all code from the scripts.sql file in the database folder
+Execute the code;
 
+run command prompt
+cd into the folder CSCI3308\Website\resources\js
+
+run command
+    node my_scripts.js
+
+you should see a message saying Connected!
+keep this window running
+
+open the file index.html in chrome from the folder ..\Website\resources\views
+
+from there you can try out your code fragments in the input box. go easy on the python if, it's buggy

@@ -1,0 +1,8 @@
+EXE=main
+
+all: $(EXE)
+
+
+
+main: main.o
+    gcc -o main main.c -Wall

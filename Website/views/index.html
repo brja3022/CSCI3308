@@ -5,15 +5,19 @@
   <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Inconsolata&display=swap" rel="stylesheet">
-    
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
  </head>
  <body>
   <script src="../resources/js/my_scripts.js"></script>
+  
   <img src="../resources/images/polyglots.gif">
 
-  <div id="stableI">INSERT</div><div id="cCode">C CODE</div>
-  <div id="Ctext" width: 100px>
-        <form id="userOut">
+ <div id="iCode"></div>
+ <div id="Guidelines">Guidelines: Don't put numbers in your variable names</div>
+  <div id="Ctext" width: 100px>Guidelines: Don't put numbers in your variable names
+        <form id="userIn">
           <input id="inputText" type="text" name="inputText" value="Put your code here">
         </form>
       </div>
@@ -24,16 +28,16 @@
     <br>
     <br>
   <div id="trans">
-   <button class="button" onclick="transpile()">Transpile</button>
+   <button class="button" onclick="parse()">Transpile</button>
   </div>
   <div id="swap">  
-    <button class="button" onclick="swapBox()">Swap</button>
+    <button class="button" onclick="myFunction()">Swap</button>
   </div> 
   <br>
   
     <div id="pythonOut">
     
-      <div id="pCode">PYTHON</div><div id="stableO">OUTPUT</div><br>
+      <div id="oCode"></div><br>
       <div id="Ptext" width: 100px>
         <form id="userOut">
           <input id ="outputText" type="text" name="outputText" value="Your output here">
@@ -42,8 +46,8 @@
       <br>
     </div>
 
- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script>document.getElementById("iCode").innerHTML = "INSERT C CODE";
+        document.getElementById("oCode").innerHTML = "PYTHON OUTPUT";</script>
+ 
 </body>
 </html>
